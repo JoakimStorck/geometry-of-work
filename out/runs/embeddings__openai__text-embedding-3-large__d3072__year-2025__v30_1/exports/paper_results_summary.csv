@@ -1,8 +1,0 @@
-Statistic,Skills,Abilities
-Test 1 — angular variation,,
-Spearman ρ (HC similarity vs Δξ),-0.603***,-0.494***
-Angular variance decomposition,,
-Median R²(ξ),0.55,0.42
-Median R²(χ),0.007,0.008
-Test 2 — radial intensification,,
-Partial Spearman ρ(χ|ξ),+0.495***,+0.281***
