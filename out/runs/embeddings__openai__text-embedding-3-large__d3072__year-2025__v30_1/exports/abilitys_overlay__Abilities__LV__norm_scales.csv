@@ -1,0 +1,54 @@
+ability,p5,p95,n_used
+__GLOBAL__,0.0,4.12,45656
+Speech Clarity,2.38,4.62,878
+Speech Recognition,2.38,4.0,878
+Memorization,1.5,3.0,878
+Oral Expression,2.88,5.0,878
+Written Expression,2.0,4.897999999999997,878
+Oral Comprehension,3.0,5.0,878
+Written Comprehension,2.38,5.0,878
+Fluency of Ideas,1.88,4.12,878
+Originality,1.75,4.0,878
+Problem Sensitivity,2.75,4.88,878
+Inductive Reasoning,2.38,4.88,878
+Deductive Reasoning,2.62,4.769499999999997,878
+Speed of Closure,1.5,3.25,878
+Category Flexibility,2.482,4.12,878
+Information Ordering,2.62,4.12,878
+Near Vision,3.0,4.25,878
+Number Facility,1.2305000000000001,4.0,878
+Mathematical Reasoning,1.12,4.12,878
+Flexibility of Closure,2.0,3.88,878
+Far Vision,2.12,3.75,878
+Selective Attention,2.38,3.517999999999997,878
+Perceptual Speed,2.0,3.5,878
+Visualization,1.75,4.0,878
+Visual Color Discrimination,1.12,3.5,878
+Hearing Sensitivity,0.88,3.0,878
+Finger Dexterity,0.6020000000000002,3.75,878
+Auditory Attention,1.12,3.25,878
+Control Precision,0.0,3.88,878
+Depth Perception,0.12,3.12,878
+Spatial Orientation,0.0,2.5,878
+Glare Sensitivity,0.0,2.38,878
+Sound Localization,0.0,2.017999999999997,878
+Rate Control,0.0,3.12,878
+Reaction Time,0.0,3.62,878
+Arm-Hand Steadiness,0.0,3.75,878
+Night Vision,0.0,1.88,878
+Wrist-Finger Speed,0.25,2.5,878
+Response Orientation,0.0,3.017999999999997,878
+Peripheral Vision,0.0,2.12,878
+Multilimb Coordination,0.0,3.62,878
+Manual Dexterity,0.0,3.5,878
+Extent Flexibility,0.0,3.75,878
+Gross Body Equilibrium,0.0,2.88,878
+Speed of Limb Movement,0.0,2.25,878
+Static Strength,0.0,3.62,878
+Dynamic Strength,0.0,2.88,878
+Trunk Strength,0.75,3.38,878
+Gross Body Coordination,0.0,2.88,878
+Stamina,0.0,3.0,878
+Explosive Strength,0.0,1.88,878
+Dynamic Flexibility,0.0,0.88,878
+Time Sharing,2.0,3.0,878

@@ -1,0 +1,11 @@
+{
+  "encoder_fragment": "openai__text-embedding-3-large__d3072",
+  "encoder_name": "openai-3-large",
+  "kind": "embeddings_run",
+  "note": "",
+  "onet_version": "30_1",
+  "prefix": "embeddings",
+  "run_tag": "embeddings__openai__text-embedding-3-large__d3072__year-2025__v30_1",
+  "saved_local": "2026-05-10T13:15:39",
+  "year": 2025
+}

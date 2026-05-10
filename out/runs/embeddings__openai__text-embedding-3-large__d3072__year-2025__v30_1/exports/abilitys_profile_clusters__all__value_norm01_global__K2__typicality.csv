@@ -1,0 +1,53 @@
+name,cluster,cluster_rank,typicality_cos
+Oral Expression,0,1,0.8912876509730979
+Oral Comprehension,0,1,0.9112614611335806
+Written Comprehension,0,1,0.9784322864313431
+Written Expression,0,1,0.9805735064589352
+Deductive Reasoning,0,1,0.9832289073607223
+Problem Sensitivity,0,1,0.9805985677061427
+Inductive Reasoning,0,1,0.9734315002949129
+Speech Clarity,0,1,0.8170794183270066
+Near Vision,0,1,0.853254963814444
+Speech Recognition,0,1,0.7830275964033644
+Information Ordering,0,1,0.9338200175393482
+Fluency of Ideas,0,1,0.9691920956051477
+Category Flexibility,0,1,0.8865537115455256
+Originality,0,1,0.9559760830354952
+Flexibility of Closure,0,1,0.7342687672914221
+Mathematical Reasoning,0,1,0.8932261139401474
+Memorization,0,1,0.9214110197417916
+Speed of Closure,0,1,0.8939192315879589
+Number Facility,0,1,0.8581998654492585
+Time Sharing,0,1,0.30225326570868327
+Selective Attention,1,2,0.30155974125969776
+Far Vision,1,2,0.2665768759653552
+Perceptual Speed,1,2,0.38238200148255613
+Visualization,1,2,0.5020609046624043
+Visual Color Discrimination,1,2,0.6558321500902904
+Auditory Attention,1,2,0.8848994261081232
+Finger Dexterity,1,2,0.8977923507316942
+Hearing Sensitivity,1,2,0.8766412916954576
+Trunk Strength,1,2,0.9279609229210435
+Arm-Hand Steadiness,1,2,0.8673253638612807
+Manual Dexterity,1,2,0.9188499036908544
+Control Precision,1,2,0.9273030517608934
+Depth Perception,1,2,0.9028340063959305
+Multilimb Coordination,1,2,0.9754483498578581
+Static Strength,1,2,0.9393579229770553
+Wrist-Finger Speed,1,2,0.9631611010086744
+Extent Flexibility,1,2,0.966503130776893
+Stamina,1,2,0.9280811489607625
+Gross Body Coordination,1,2,0.9449967103539509
+Dynamic Strength,1,2,0.9417338866250823
+Response Orientation,1,2,0.9861849604668619
+Reaction Time,1,2,0.9684661534941085
+Gross Body Equilibrium,1,2,0.9719440108177152
+Explosive Strength,1,2,0.8805558213734049
+Rate Control,1,2,0.9693856257484714
+Speed of Limb Movement,1,2,0.9154879632738484
+Spatial Orientation,1,2,0.905202323887343
+Glare Sensitivity,1,2,0.9373797540484082
+Peripheral Vision,1,2,0.9219421101458644
+Sound Localization,1,2,0.9154315645600036
+Night Vision,1,2,0.9174808596560909
+Dynamic Flexibility,1,2,0.7141478057376155

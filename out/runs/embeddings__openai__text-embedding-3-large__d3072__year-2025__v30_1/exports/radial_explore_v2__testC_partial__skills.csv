@@ -1,0 +1,10 @@
+metric,group,partial_rho,n
+norm_v,(i) intensification,0.11387862225522019,878
+norm_v_minus_global,(i) intensification,0.4953160733763931,878
+gini_v,(ii) focusing (raw),0.14246088126750156,878
+gini_resid_abs,(ii) focusing (resid),0.03167632716340214,878
+participation_v,(ii) focusing (raw),-0.13685786866253805,878
+participation_resid_abs,(ii) focusing (resid),-0.036835827992856084,878
+dist_to_xi_centroid,(iii) rare blend,-0.3009686760469606,878
+cos_dist_to_xi_centroid,(iii) rare blend,-0.32311201974201864,878
+mean_level,baseline,0.038918563331664324,878

@@ -1,0 +1,4 @@
+metric,display_name,rho_global,p_global,n_global,rho_partial_xi,p_partial_xi,n_partial,frac_sectors_positive,median_sector_rho,n_sectors
+norm_v_minus_global,Distance from global mean profile,0.5029993605209175,1.737176178652649e-57,878,0.4953160733763932,0.0,878,1.0,0.510049679930646,8.0
+gini_resid_abs,Gini on |residual|,0.04203643499821494,0.21336713780004976,878,0.03167632716340217,0.35,878,0.375,-0.013336135807788,8.0
+participation_resid_abs,Participation on |residual|,-0.049328838614873964,0.1441601614370047,878,-0.03683582799285608,0.279,878,0.5,0.011807509130546017,8.0

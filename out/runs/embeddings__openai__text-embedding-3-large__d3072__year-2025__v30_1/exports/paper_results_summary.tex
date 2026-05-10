@@ -1,0 +1,20 @@
+\begin{table}[!htbp]
+\centering
+\caption{Headline statistics for Skills and Abilities. Test 1 reports pair-level Spearman correlation between cosine similarity in descriptor space and circular angular distance $\Delta\xi$ across all occupation pairs. $R^{2}(\xi)$ and $R^{2}(\chi)$ are per-descriptor variance shares; medians are taken across descriptors. Partial Spearman $\rho(\chi\,\vert\,\xi)$ uses rank residualization against $\xi$ via von Mises kernel regression. Significance: $^{***}\,p<0.001$ (Test 2 by 1000-permutation test).}
+\label{tab:paper_summary}
+\begin{tblr}{
+  colspec = {l c c},
+}
+\toprule
+\textbf{Statistic} & \textbf{Skills} & \textbf{Abilities} \\
+\midrule
+\textbf{Test 1 --- angular variation} & & \\
+\quad Spearman $\rho$ (HC similarity vs $\Delta$$\xi$) & -0.603*** & -0.494*** \\
+\textbf{Angular variance decomposition} & & \\
+\quad Median R\textsuperscript{2}($\xi$) & 0.55 & 0.42 \\
+\quad Median R\textsuperscript{2}($\chi$) & 0.007 & 0.008 \\
+\textbf{Test 2 --- radial intensification} & & \\
+\quad Partial Spearman $\rho$($\chi$\,\vert\,$\xi$) & +0.495*** & +0.281*** \\
+\bottomrule
+\end{tblr}
+\end{table}

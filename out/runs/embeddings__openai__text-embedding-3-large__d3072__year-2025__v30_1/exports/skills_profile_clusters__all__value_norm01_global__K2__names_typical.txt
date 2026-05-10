@@ -1,0 +1,63 @@
+C1 (cluster=0, n=27):
+  Band width meaning: hi-lo is dispersion in level at each θ; narrower = more homogeneous, wider = more heterogeneous.
+  Top-typical (cosine to derivative-center):
+    - Active Learning  (sim=0.978)
+    - Writing  (sim=0.977)
+    - Critical Thinking  (sim=0.975)
+    - Systems Evaluation  (sim=0.973)
+    - Judgment and Decision Making  (sim=0.971)
+    - Complex Problem Solving  (sim=0.966)
+    - Reading Comprehension  (sim=0.956)
+    - Systems Analysis  (sim=0.951)
+    - Speaking  (sim=0.949)
+    - Monitoring  (sim=0.947)
+  Alphabetical (all):
+    - Active Learning
+    - Active Listening
+    - Complex Problem Solving
+    - Coordination
+    - Critical Thinking
+    - Instructing
+    - Judgment and Decision Making
+    - Learning Strategies
+    - Management of Financial Resources
+    - Management of Material Resources
+    - Management of Personnel Resources
+    - Mathematics
+    - Monitoring
+    - Negotiation
+    - Operations Analysis
+    - Persuasion
+    - Programming
+    - Reading Comprehension
+    - Science
+    - Service Orientation
+    - Social Perceptiveness
+    - Speaking
+    - Systems Analysis
+    - Systems Evaluation
+    - Technology Design
+    - Time Management
+    - Writing
+
+C2 (cluster=1, n=8):
+  Band width meaning: hi-lo is dispersion in level at each θ; narrower = more homogeneous, wider = more heterogeneous.
+  Top-typical (cosine to derivative-center):
+    - Troubleshooting  (sim=0.987)
+    - Equipment Selection  (sim=0.980)
+    - Operation and Control  (sim=0.973)
+    - Equipment Maintenance  (sim=0.967)
+    - Repairing  (sim=0.960)
+    - Operations Monitoring  (sim=0.951)
+    - Quality Control Analysis  (sim=0.887)
+    - Installation  (sim=0.763)
+  Alphabetical (all):
+    - Equipment Maintenance
+    - Equipment Selection
+    - Installation
+    - Operation and Control
+    - Operations Monitoring
+    - Quality Control Analysis
+    - Repairing
+    - Troubleshooting
+
