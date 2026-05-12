@@ -1,0 +1,7 @@
+Distance,Outcome,Weighted ρ,N pairs
+Euclidean d,|Δ ln(wage)|,0.335435,307720
+Euclidean d,|Δ RLE|,0.449515,307720
+Angular Δξ,|Δ ln(wage)|,0.360196,307720
+Angular Δξ,|Δ RLE|,0.421098,307720
+Radial Δχ,|Δ ln(wage)|,-0.039679,307720
+Radial Δχ,|Δ RLE|,0.014616,307720
