@@ -1,0 +1,11 @@
+{
+  "encoder_fragment": "st__sentence-transformers_gtr-t5-large__d?",
+  "encoder_name": "st-gtr-t5-large",
+  "kind": "embeddings_run",
+  "note": "",
+  "onet_version": "30_1",
+  "prefix": "embeddings",
+  "run_tag": "embeddings__st__sentence-transformers_gtr-t5-large__d__year-2025__v30_1",
+  "saved_local": "2026-05-16T21:46:50",
+  "year": 2025
+}

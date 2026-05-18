@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering
+\caption{Encoder comparison. Score is the mean of Family $R$, the two socioeconomic predictions, and $\min(\text{Radial spread}/0.5, 1)$. Family $R$ is the mean angular concentration within each O*NET Job Family. Socioeconomic predictions are Spearman correlations between $\Delta\xi$ and absolute pair-level differences in log wage and required level of education over 357,435 pairs. Radial spread is the median of $\chi$; aspect ratio is the ratio of the larger to the smaller standard deviation in Cartesian coordinates after Procrustes alignment to the reference. $\rho(\Delta\xi, \Delta\xi_{\mathrm{ref}})$ measures pair-level angular consistency with the reference encoder (\texttt{openai-3-large}) over 385,003 pairs.}
+\label{tab:encoder_robustness}
+\footnotesize
+\begin{tabular}{lrrrrrrr}
+\toprule
+ & & Job Family & \multicolumn{2}{c}{Socioeconomic prediction} & \multicolumn{2}{c}{Radial form} & Consistency \\
+\cmidrule(lr){4-5} \cmidrule(lr){6-7}
+Encoder & Score & Family $R$ & $\rho(\Delta\xi, |\Delta\ln w|)$ & $\rho(\Delta\xi, \Delta\mathrm{RLE})$ & Spread & Aspect & $\rho(\Delta\xi, \Delta\xi_{\mathrm{ref}})$ \\
+\midrule
+openai-3-large & 0.573 & 0.793 & 0.282 & 0.410 & 0.403 & 1.54 & 1.000 \\
+st-gtr-t5-large & 0.523 & 0.761 & 0.227 & 0.404 & 0.350 & 1.75 & 0.837 \\
+qwen3-embedding-4b & 0.523 & 0.765 & 0.225 & 0.380 & 0.361 & 1.77 & 0.808 \\
+bge-m3 & 0.501 & 0.776 & 0.231 & 0.348 & 0.324 & 1.66 & 0.850 \\
+st-minilm-l6-v2 & 0.469 & 0.756 & 0.150 & 0.270 & 0.350 & 1.66 & 0.751 \\
+mistral-embed-norm & 0.417 & 0.708 & 0.154 & 0.323 & 0.242 & 2.30 & 0.696 \\
+tfidf-svd-768 & 0.290 & 0.646 & 0.141 & 0.242 & 0.066 & 1.84 & 0.536 \\
+\bottomrule
+\end{tabular}
+\end{table}

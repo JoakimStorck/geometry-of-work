@@ -1,0 +1,11 @@
+{
+  "batch_size_info": 256,
+  "embedder_id": "tfidf:ng=1-2;mf=50000?svd=768",
+  "embedder_sig": "tfidf_ng_1-2_mf_50000_svd_768__prev0.2__77800f82ef",
+  "embedder_slug": "tfidf_ng_1-2_mf_50000_svd_768",
+  "kind": "run_embeddings",
+  "n": 17606,
+  "normalize": true,
+  "preproc_version": "v0.2",
+  "texts_digest": "1ad5fcdb4aa46f04b9a3e972780aa57874eba046fb9286345e71be7b8623ebb3"
+}

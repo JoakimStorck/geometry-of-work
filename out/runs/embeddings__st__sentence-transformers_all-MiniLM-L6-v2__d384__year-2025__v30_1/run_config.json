@@ -1,0 +1,11 @@
+{
+  "encoder_fragment": "st__sentence-transformers_all-MiniLM-L6-v2__d384",
+  "encoder_name": "st-minilm-l6-v2",
+  "kind": "embeddings_run",
+  "note": "",
+  "onet_version": "30_1",
+  "prefix": "embeddings",
+  "run_tag": "embeddings__st__sentence-transformers_all-MiniLM-L6-v2__d384__year-2025__v30_1",
+  "saved_local": "2026-05-16T21:26:46",
+  "year": 2025
+}

@@ -1,0 +1,42 @@
+{
+  "definitions": {
+    "A_within_occ__task_compactness": "Distances from tasks (pc1,pc2) to occupation center (pc1,pc2). Lower means tasks cluster more tightly within an occupation.",
+    "B_between_occ__separation_index_inter_over_intra": "Mean distance between occupation centers divided by mean within-occupation task spread.",
+    "B_neighbors__knn_same_family_share": "For each occupation, share of its 10 nearest occupations that are in the same Job Family.",
+    "C_family__family_spread": "Distances from occupations to their Job Family center (pc1,pc2). Lower means the family is more compact.",
+    "C_family__directionality_R": "Angular concentration in xi (R). Higher means stronger shared direction within family."
+  },
+  "parameters": {
+    "k_nearest_neighbors": 10
+  },
+  "counts": {
+    "n_tasks_used": 17606,
+    "n_occupations_used": 878,
+    "n_job_families_used": 22
+  },
+  "overview": {
+    "n_tasks_used": 17606.0,
+    "n_occupations_used": 878.0,
+    "n_job_families_used": 22.0,
+    "A_within_occ__mean_task_spread_mean_over_occupations": 0.09693029791861012,
+    "A_within_occ__mean_task_spread_q10": 0.0739908152446939,
+    "A_within_occ__mean_task_spread_q50": 0.09678908417434168,
+    "A_within_occ__mean_task_spread_q90": 0.1195805749460941,
+    "B_between_occ__mean_inter_occupation_distance": 0.1683099705620885,
+    "B_between_occ__separation_index_inter_over_intra": 1.7364020762983112,
+    "B_neighbors__mean_share_of_10_nn_in_same_family": 0.2517084282460137,
+    "B_neighbors__median_share_of_10_nn_in_same_family": 0.2,
+    "B_neighbors__same_family_share_q10": 0.0,
+    "B_neighbors__same_family_share_q50": 0.2,
+    "B_neighbors__same_family_share_q90": 0.6,
+    "C_family__mean_family_spread_mean_over_families": 0.059882191501477326,
+    "C_family__family_spread_q10": 0.04528483674098719,
+    "C_family__family_spread_q50": 0.06175981281439416,
+    "C_family__family_spread_q90": 0.07399049417711327,
+    "C_family__mean_directionality_R_mean_over_families": 0.7613866252485447,
+    "C_family__directionality_R_q10": 0.5043764439371148,
+    "C_family__directionality_R_q50": 0.7944367049834504,
+    "C_family__directionality_R_q90": 0.9669056853560721,
+    "C_family__share_families_R_ge_0p7": 0.7272727272727273
+  }
+}

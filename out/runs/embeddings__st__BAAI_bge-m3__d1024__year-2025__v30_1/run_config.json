@@ -1,0 +1,11 @@
+{
+  "encoder_fragment": "st__BAAI_bge-m3__d1024",
+  "encoder_name": "bge-m3",
+  "kind": "embeddings_run",
+  "note": "",
+  "onet_version": "30_1",
+  "prefix": "embeddings",
+  "run_tag": "embeddings__st__BAAI_bge-m3__d1024__year-2025__v30_1",
+  "saved_local": "2026-05-17T01:41:26",
+  "year": 2025
+}

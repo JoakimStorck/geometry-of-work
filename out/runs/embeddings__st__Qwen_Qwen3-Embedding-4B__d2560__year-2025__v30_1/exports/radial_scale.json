@@ -1,0 +1,9 @@
+{
+  "mode": "zero_max",
+  "p_low": 0.05,
+  "p_high": 0.95,
+  "r0": 0.0,
+  "r1": 0.47649166526992764,
+  "clip": true,
+  "SECTOR_ROTATION": 0.0
+}

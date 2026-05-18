@@ -1,36 +1,36 @@
 name,cluster,cluster_rank,typicality_cos
-Active Listening,0,1,0.9375179732894693
-Reading Comprehension,0,1,0.9563582741316304
-Speaking,0,1,0.9487945291152726
-Critical Thinking,0,1,0.9753883885323463
-Writing,0,1,0.9768387309297513
-Social Perceptiveness,0,1,0.7522777279469741
-Monitoring,0,1,0.9474904235461187
-Active Learning,0,1,0.9781844132387751
-Judgment and Decision Making,0,1,0.9705864674561523
-Complex Problem Solving,0,1,0.9662090218620757
-Coordination,0,1,0.8779525202371093
-Service Orientation,0,1,0.5132174565266425
-Learning Strategies,0,1,0.8981646040925261
-Instructing,0,1,0.9001174641399307
-Time Management,0,1,0.9385377366579363
-Persuasion,0,1,0.8839476081734224
-Systems Evaluation,0,1,0.9727674350781108
-Negotiation,0,1,0.8814538231336613
-Systems Analysis,0,1,0.9506704404513688
-Management of Personnel Resources,0,1,0.9417777949683307
-Mathematics,0,1,0.7783828923668955
-Operations Analysis,0,1,0.8797747939728513
-Science,0,1,0.8190404841960952
-Management of Financial Resources,0,1,0.8263757295208359
-Management of Material Resources,0,1,0.8130685982901615
-Technology Design,0,1,0.6418890035514044
-Programming,0,1,0.5907124527553762
-Operations Monitoring,1,2,0.9514025861808321
-Quality Control Analysis,1,2,0.8873365402048028
-Operation and Control,1,2,0.9726117862592735
-Troubleshooting,1,2,0.9874413226275621
-Equipment Selection,1,2,0.9803064940999235
-Equipment Maintenance,1,2,0.9674535646848105
-Repairing,1,2,0.9604520683586459
-Installation,1,2,0.7627762382518176
+Active Listening,0,1,0.9375774041187968
+Reading Comprehension,0,1,0.9563900539809675
+Speaking,0,1,0.948787089203773
+Critical Thinking,0,1,0.9753837846323763
+Writing,0,1,0.9768325898239757
+Social Perceptiveness,0,1,0.7523180136144441
+Monitoring,0,1,0.9474783115843467
+Active Learning,0,1,0.9781951089146522
+Judgment and Decision Making,0,1,0.9705788143860755
+Complex Problem Solving,0,1,0.9662080139595969
+Coordination,0,1,0.8779743199898912
+Service Orientation,0,1,0.5133630834330508
+Learning Strategies,0,1,0.8981372778894003
+Instructing,0,1,0.9001008340112487
+Time Management,0,1,0.9385143769601275
+Persuasion,0,1,0.8839315141255223
+Systems Evaluation,0,1,0.9727472681558158
+Negotiation,0,1,0.881438646542252
+Systems Analysis,0,1,0.9506400207612751
+Management of Personnel Resources,0,1,0.9418118264899623
+Mathematics,0,1,0.7784058077148334
+Operations Analysis,0,1,0.8797708557403723
+Science,0,1,0.819002794864773
+Management of Financial Resources,0,1,0.8263496004669376
+Management of Material Resources,0,1,0.8131295966120584
+Technology Design,0,1,0.6418104274597769
+Programming,0,1,0.5907031555239883
+Operations Monitoring,1,2,0.9514014320035915
+Quality Control Analysis,1,2,0.8872969389208154
+Operation and Control,1,2,0.9726141084471744
+Troubleshooting,1,2,0.9874367554999841
+Equipment Selection,1,2,0.9802524227938335
+Equipment Maintenance,1,2,0.9674822222933883
+Repairing,1,2,0.9604712042987322
+Installation,1,2,0.7627802471516278

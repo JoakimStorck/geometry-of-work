@@ -1,7 +1,7 @@
 {
   "batch_size_info": 256,
   "embedder_id": "openai:text-embedding-3-large?dim=3072",
-  "embedder_sig": "openai_text-embedding-3-large_dim_3072__prev0.2__a9908cabb6",
+  "embedder_sig": "openai_text-embedding-3-large_dim_3072__prev0.2__bd4db41eb9",
   "embedder_slug": "openai_text-embedding-3-large_dim_3072",
   "kind": "run_embeddings",
   "n": 17606,

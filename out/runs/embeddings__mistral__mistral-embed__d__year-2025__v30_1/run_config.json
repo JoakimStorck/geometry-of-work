@@ -1,0 +1,11 @@
+{
+  "encoder_fragment": "mistral__mistral-embed__d?",
+  "encoder_name": "mistral-embed-norm",
+  "kind": "embeddings_run",
+  "note": "",
+  "onet_version": "30_1",
+  "prefix": "embeddings",
+  "run_tag": "embeddings__mistral__mistral-embed__d__year-2025__v30_1",
+  "saved_local": "2026-05-16T21:57:46",
+  "year": 2025
+}

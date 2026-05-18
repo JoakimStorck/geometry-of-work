@@ -1,0 +1,11 @@
+{
+  "batch_size_info": 256,
+  "embedder_id": "mistral:mistral-embed",
+  "embedder_sig": "mistral_mistral-embed__prev0.2__8c21d027ab",
+  "embedder_slug": "mistral_mistral-embed",
+  "kind": "run_embeddings",
+  "n": 17606,
+  "normalize": true,
+  "preproc_version": "v0.2",
+  "texts_digest": "1ad5fcdb4aa46f04b9a3e972780aa57874eba046fb9286345e71be7b8623ebb3"
+}

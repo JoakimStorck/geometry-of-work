@@ -1,0 +1,42 @@
+{
+  "definitions": {
+    "A_within_occ__task_compactness": "Distances from tasks (pc1,pc2) to occupation center (pc1,pc2). Lower means tasks cluster more tightly within an occupation.",
+    "B_between_occ__separation_index_inter_over_intra": "Mean distance between occupation centers divided by mean within-occupation task spread.",
+    "B_neighbors__knn_same_family_share": "For each occupation, share of its 10 nearest occupations that are in the same Job Family.",
+    "C_family__family_spread": "Distances from occupations to their Job Family center (pc1,pc2). Lower means the family is more compact.",
+    "C_family__directionality_R": "Angular concentration in xi (R). Higher means stronger shared direction within family."
+  },
+  "parameters": {
+    "k_nearest_neighbors": 10
+  },
+  "counts": {
+    "n_tasks_used": 17606,
+    "n_occupations_used": 878,
+    "n_job_families_used": 22
+  },
+  "overview": {
+    "n_tasks_used": 17606.0,
+    "n_occupations_used": 878.0,
+    "n_job_families_used": 22.0,
+    "A_within_occ__mean_task_spread_mean_over_occupations": 0.09588924296744203,
+    "A_within_occ__mean_task_spread_q10": 0.07496763925243535,
+    "A_within_occ__mean_task_spread_q50": 0.09534614714076112,
+    "A_within_occ__mean_task_spread_q90": 0.11748927868216623,
+    "B_between_occ__mean_inter_occupation_distance": 0.13103990057172707,
+    "B_between_occ__separation_index_inter_over_intra": 1.3665756086552898,
+    "B_neighbors__mean_share_of_10_nn_in_same_family": 0.20694760820045557,
+    "B_neighbors__median_share_of_10_nn_in_same_family": 0.1,
+    "B_neighbors__same_family_share_q10": 0.0,
+    "B_neighbors__same_family_share_q50": 0.1,
+    "B_neighbors__same_family_share_q90": 0.5,
+    "C_family__mean_family_spread_mean_over_families": 0.04713066848495428,
+    "C_family__family_spread_q10": 0.031590025539240334,
+    "C_family__family_spread_q50": 0.049311355977306126,
+    "C_family__family_spread_q90": 0.05600455746830544,
+    "C_family__mean_directionality_R_mean_over_families": 0.7075747750004097,
+    "C_family__directionality_R_q10": 0.4785281667826392,
+    "C_family__directionality_R_q50": 0.7279323540086069,
+    "C_family__directionality_R_q90": 0.9551454058829877,
+    "C_family__share_families_R_ge_0p7": 0.5909090909090909
+  }
+}

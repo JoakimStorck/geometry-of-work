@@ -1,0 +1,11 @@
+{
+  "batch_size_info": 256,
+  "embedder_id": "st:sentence-transformers/all-MiniLM-L6-v2",
+  "embedder_sig": "st_sentence-transformers_all-MiniLM-L6-v2__prev0.2__440ac3bb9d",
+  "embedder_slug": "st_sentence-transformers_all-MiniLM-L6-v2",
+  "kind": "run_embeddings",
+  "n": 17606,
+  "normalize": true,
+  "preproc_version": "v0.2",
+  "texts_digest": "1ad5fcdb4aa46f04b9a3e972780aa57874eba046fb9286345e71be7b8623ebb3"
+}
