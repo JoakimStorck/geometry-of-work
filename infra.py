@@ -730,6 +730,97 @@ def load_embeddings_run(*, strict: bool = True, return_status: bool = False):
     return rp, cfg, spec
 
 
+# Add to infra.py, after load_embeddings_run()
+
+def find_embeddings_run(
+    encoder_name: str,
+    *,
+    year: int | None = None,
+    onet_version: str | None = None,
+    prefix: str = "embeddings",
+    strict: bool = True,
+) -> RunPaths | None:
+    """
+    Find a single embeddings run matching encoder_name (and optionally year/onet_version).
+    
+    Reads run_config.json of each candidate; does not activate the run.
+    Returns RunPaths pointing into the matching run, or None if not found
+    (or raises if strict=True and not found).
+    
+    If multiple runs match, returns the most recent (by mtime).
+    """
+    v_norm = str(onet_version).replace(".", "_") if onet_version is not None else None
+    candidates = list_runs(prefix=prefix)
+    
+    matches: list[tuple[float, RunPaths]] = []
+    for info in candidates:
+        cfg_fp = _run_config_path(info.path)
+        if not cfg_fp.exists():
+            continue
+        try:
+            cfg = _read_run_config_file(cfg_fp)
+        except Exception:
+            continue
+        if cfg.get("kind") != "embeddings_run":
+            continue
+        if str(cfg.get("encoder_name", "")).strip() != str(encoder_name).strip():
+            continue
+        if year is not None and int(cfg.get("year", -1)) != int(year):
+            continue
+        if v_norm is not None and str(cfg.get("onet_version", "")).replace(".", "_") != v_norm:
+            continue
+        rp = RunPaths(run_tag=info.tag)
+        matches.append((info.mtime, rp))
+    
+    if not matches:
+        if strict:
+            raise FileNotFoundError(
+                f"No embeddings run found for encoder_name={encoder_name!r}"
+                + (f", year={year}" if year is not None else "")
+                + (f", onet_version={onet_version!r}" if onet_version is not None else "")
+            )
+        return None
+    
+    matches.sort(key=lambda t: t[0], reverse=True)
+    return matches[0][1]
+
+
+def iter_embeddings_runs(
+    *,
+    year: int | None = None,
+    onet_version: str | None = None,
+    prefix: str = "embeddings",
+) -> list[tuple[str, RunPaths, dict[str, Any]]]:
+    """
+    Yield (encoder_name, RunPaths, run_config) for every embeddings run on disk
+    that matches the given filters. Most recent first when multiple runs share
+    an encoder_name.
+    """
+    v_norm = str(onet_version).replace(".", "_") if onet_version is not None else None
+    out: list[tuple[float, str, RunPaths, dict[str, Any]]] = []
+    for info in list_runs(prefix=prefix):
+        cfg_fp = _run_config_path(info.path)
+        if not cfg_fp.exists():
+            continue
+        try:
+            cfg = _read_run_config_file(cfg_fp)
+        except Exception:
+            continue
+        if cfg.get("kind") != "embeddings_run":
+            continue
+        if year is not None and int(cfg.get("year", -1)) != int(year):
+            continue
+        if v_norm is not None and str(cfg.get("onet_version", "")).replace(".", "_") != v_norm:
+            continue
+        enc_name = str(cfg.get("encoder_name", "")).strip()
+        if not enc_name:
+            continue
+        out.append((info.mtime, enc_name, RunPaths(run_tag=info.tag), cfg))
+    
+    out.sort(key=lambda t: t[0], reverse=True)
+    return [(name, rp, cfg) for _, name, rp, cfg in out]
+    
+
 # ─────────────────────────────────────────────────────────────
 # Generic IO helpers
 # ─────────────────────────────────────────────────────────────
@@ -798,6 +889,8 @@ __all__ = [
     "write_run_config",
     "init_embeddings_run",
     "load_embeddings_run",
+    "find_embeddings_run",
+    "iter_embeddings_runs",
     "read_json",
     "write_json",
     "read_pkl",

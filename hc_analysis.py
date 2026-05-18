@@ -124,9 +124,9 @@ def compute_angular_similarity(
     })
 
     if write_csv:
-        binned_df.to_csv(infra.RP.export_fp(f"hc_test1__angular_similarity__{label}s__binned.csv"),
+        binned_df.to_csv(infra.RP.export_fp(f"hc__angular_similarity__{label}s__binned.csv"),
                          index=False)
-        pairs_df.to_csv(infra.RP.export_fp(f"hc_test1__angular_similarity__{label}s__pairs.csv"),
+        pairs_df.to_csv(infra.RP.export_fp(f"hc__angular_similarity__{label}s__pairs.csv"),
                         index=False)
 
     log(f"[Test 1] {label}s: {n} occs, {len(sims)} pairs, {n_bins} bins")
@@ -140,7 +140,7 @@ def compute_angular_similarity(
     )
 
 
-def plot_test1_angular_similarity(
+def plot_angular_similarity(
     skills_result: AngularSimilarityResult,
     abilities_result: AngularSimilarityResult,
     *,
@@ -170,13 +170,13 @@ def plot_test1_angular_similarity(
         ax.set_title(f"{panel_title}\nSpearman ρ = {rho:.3f}", fontsize=10)
 
     fig.suptitle(
-        "Test 1: HC similarity vs angular distance between occupations",
+        "Capability similarity vs angular distance between occupations",
         fontsize=12, y=1.02,
     )
     fig.tight_layout()
 
-    out_pdf = infra.RP.figure_fp("hc_test1__angular_similarity.pdf")
-    out_png = infra.RP.figure_fp("hc_test1__angular_similarity.png")
+    out_pdf = infra.RP.figure_fp("hc__angular_similarity.pdf")
+    out_png = infra.RP.figure_fp("hc__angular_similarity.png")
     fig.savefig(out_pdf, dpi=300, bbox_inches="tight")
     fig.savefig(out_png, dpi=300, bbox_inches="tight")
     log(f"Saved figure: {out_pdf.name}")

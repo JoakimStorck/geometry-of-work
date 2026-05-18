@@ -48,28 +48,34 @@ def _l2_normalize(x: np.ndarray, eps: float = 1e-12) -> np.ndarray:
     return x / np.maximum(n, eps)
 
 
+# Uppdaterad _runtime_versions (lägg till tfidf-grenen)
 def _runtime_versions(spec: "EncoderSpec") -> Dict[str, str]:
     out = {"python": sys.version.split()[0], "numpy": np.__version__}
     try:
         if spec.encoder_type == "openai":
-            import openai  # type: ignore
+            import openai
             out["openai"] = getattr(openai, "__version__", "unknown")
         elif spec.encoder_type == "sentence-transformers":
-            import sentence_transformers  # type: ignore
+            import sentence_transformers
             out["sentence_transformers"] = getattr(sentence_transformers, "__version__", "unknown")
             try:
-                import transformers  # type: ignore
+                import transformers
                 out["transformers"] = getattr(transformers, "__version__", "unknown")
             except Exception:
                 pass
             try:
-                import torch  # type: ignore
+                import torch
                 out["torch"] = getattr(torch, "__version__", "unknown")
             except Exception:
                 pass
         elif spec.encoder_type == "mistral":
-            import mistralai  # type: ignore
+            import mistralai
             out["mistralai"] = getattr(mistralai, "__version__", "unknown")
+        elif spec.encoder_type == "tfidf":
+            import sklearn
+            out["scikit_learn"] = getattr(sklearn, "__version__", "unknown")
+            import scipy
+            out["scipy"] = getattr(scipy, "__version__", "unknown")
     except Exception:
         pass
     return out
@@ -103,6 +109,7 @@ def _retry(
 # Signature + provider embed fns
 # ─────────────────────────────────────────────────────────────
 
+# Uppdaterad embedder_signature (lägg till tfidf-fält i payload)
 def embedder_signature(spec: EncoderSpec) -> str:
     payload = {
         "encoder_type": spec.encoder_type,
@@ -115,8 +122,15 @@ def embedder_signature(spec: EncoderSpec) -> str:
         "st_model": spec.st_model,
         "st_device": spec.st_device,
         "st_trust_remote_code": spec.st_trust_remote_code,
+        "st_instruction_prefix": spec.st_instruction_prefix,
+        "st_model_kwargs": dict(spec.st_model_kwargs or {}),
         "mistral_model": spec.mistral_model,
-        # retry knobs affect runtime behavior, not embedding output; do not include
+        "tfidf_max_features": spec.tfidf_max_features,
+        "tfidf_min_df": spec.tfidf_min_df,
+        "tfidf_max_df": spec.tfidf_max_df,
+        "tfidf_ngram_range": list(spec.tfidf_ngram_range),
+        "tfidf_sublinear_tf": spec.tfidf_sublinear_tf,
+        "tfidf_svd_random_state": spec.tfidf_svd_random_state,
     }
     canon = json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     h = hashlib.sha256(canon).hexdigest()[:10]
@@ -157,23 +171,51 @@ def make_embed_fn_openai(spec: EncoderSpec) -> Callable[[List[str]], np.ndarray]
     return _embed
 
 
+# Uppdaterad ST-funktion med prefix-stöd
 def make_embed_fn_sentence_transformers(spec: EncoderSpec) -> Callable[[List[str]], np.ndarray]:
-    from sentence_transformers import SentenceTransformer  # type: ignore
+    from sentence_transformers import SentenceTransformer
 
     if not spec.st_model:
         raise ValueError("st_model saknas")
 
-    model = SentenceTransformer(spec.st_model, device=spec.st_device, trust_remote_code=spec.st_trust_remote_code)
+    # Resolve dtype string → torch.dtype if provided in model_kwargs.
+    model_kwargs = dict(spec.st_model_kwargs or {})
+    if "dtype" in model_kwargs and isinstance(model_kwargs["dtype"], str):
+        import torch
+        dtype_map = {
+            "bfloat16": torch.bfloat16,
+            "float16": torch.float16,
+            "float32": torch.float32,
+        }
+        s = model_kwargs["dtype"]
+        if s not in dtype_map:
+            raise ValueError(f"Unknown dtype: {s!r}")
+        model_kwargs["dtype"] = dtype_map[s]
+
+    model = SentenceTransformer(
+        spec.st_model,
+        device=spec.st_device,
+        trust_remote_code=spec.st_trust_remote_code,
+        model_kwargs=model_kwargs if model_kwargs else None,
+    )
+    prefix = spec.st_instruction_prefix or ""
 
     def _embed(batch: List[str]) -> np.ndarray:
-        arr = model.encode(batch, convert_to_numpy=True, show_progress_bar=False, normalize_embeddings=False)
+        if prefix:
+            batch = [f"{prefix}{t}" for t in batch]
+        arr = model.encode(
+            batch,
+            convert_to_numpy=True,
+            show_progress_bar=False,
+            normalize_embeddings=False,
+        )
         return np.asarray(arr, dtype=np.float32)
 
     return _embed
 
 
 def make_embed_fn_mistral(spec: EncoderSpec) -> Callable[[List[str]], np.ndarray]:
-    from mistralai import Mistral  # type: ignore
+    from mistralai.client import Mistral  # type: ignore
 
     api_key = os.environ.get(spec.mistral_api_key_env)
     if not api_key:
@@ -201,6 +243,82 @@ def make_embed_fn_mistral(spec: EncoderSpec) -> Callable[[List[str]], np.ndarray
     return _embed
 
 
+    # Helt ny: TF-IDF + TruncatedSVD (corpus-fitted, separate path)
+def compute_tfidf_embeddings(
+    texts: List[str],
+    *,
+    spec: EncoderSpec,
+    show_progress: bool = True,
+    progress_desc: str = "Embedding (tfidf)",
+) -> np.ndarray:
+    """
+    Compute TF-IDF + TruncatedSVD embeddings on the full text corpus.
+
+    Unlike API-based encoders, TF-IDF is corpus-fitted: vocabulary, idf weights,
+    and SVD components are all learned from the supplied texts. The result is a
+    dense (n_texts, dimensions) matrix matching the format produced by the
+    other encoders.
+
+    Bypasses the per-text cache since computation is fast and not text-local.
+    """
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.decomposition import TruncatedSVD
+
+    texts_pp = preprocess_texts(texts, allow_none=True)
+    n = len(texts_pp)
+
+    if spec.dimensions is None or spec.dimensions <= 0:
+        raise ValueError("TF-IDF encoder requires positive 'dimensions' (SVD output size)")
+
+    if show_progress:
+        print(f"   [{progress_desc}] fitting TfidfVectorizer on {n:,} texts...")
+
+    vec = TfidfVectorizer(
+        max_features=spec.tfidf_max_features,
+        min_df=spec.tfidf_min_df,
+        max_df=spec.tfidf_max_df,
+        ngram_range=tuple(spec.tfidf_ngram_range),
+        sublinear_tf=spec.tfidf_sublinear_tf,
+        lowercase=True,
+        strip_accents="unicode",
+    )
+    X_sparse = vec.fit_transform(texts_pp)
+    actual_vocab = X_sparse.shape[1]
+
+    svd_components = int(spec.dimensions)
+    if svd_components >= actual_vocab:
+        # SVD can't produce more components than the sparse rank allows.
+        # Cap at actual_vocab - 1 with a warning.
+        capped = max(2, actual_vocab - 1)
+        print(f"   [{progress_desc}] WARNING: requested svd dim {svd_components} >= "
+              f"vocab size {actual_vocab}, capping at {capped}")
+        svd_components = capped
+
+    if show_progress:
+        print(f"   [{progress_desc}] TruncatedSVD: {actual_vocab} → {svd_components}")
+
+    svd = TruncatedSVD(
+        n_components=svd_components,
+        random_state=int(spec.tfidf_svd_random_state),
+    )
+    X_dense = svd.fit_transform(X_sparse).astype(np.float32, copy=False)
+
+    # If actual SVD dim < requested (vocab-limited), zero-pad to requested dims
+    # so downstream shape assertions hold.
+    if X_dense.shape[1] < int(spec.dimensions):
+        pad = np.zeros((n, int(spec.dimensions) - X_dense.shape[1]), dtype=np.float32)
+        X_dense = np.concatenate([X_dense, pad], axis=1)
+
+    if spec.normalize:
+        X_dense = _l2_normalize(X_dense)
+
+    if show_progress:
+        evr = float(svd.explained_variance_ratio_.sum())
+        print(f"   [{progress_desc}] done. SVD explained variance ratio sum: {evr:.4f}")
+
+    return X_dense
+
+    
 def make_embed_fn(spec: EncoderSpec) -> Callable[[List[str]], np.ndarray]:
     if spec.encoder_type == "openai":
         return make_embed_fn_openai(spec)
@@ -406,6 +524,7 @@ def fingerprint_matches(fp_prev: Mapping[str, Any], fp_now: Mapping[str, Any]) -
     return all(fp_prev.get(k) == fp_now.get(k) for k in keys)
 
 
+# Uppdaterad load_or_compute_run_embeddings (lägg till tfidf-gren)
 def load_or_compute_run_embeddings(
     texts: list[str],
     *,
@@ -422,7 +541,8 @@ def load_or_compute_run_embeddings(
     """
     Run-local persistens:
     - Om emb_npy + fp_json finns och fingerprint matchar -> load .npy
-    - Annars compute via embed_texts(cache_scope) och spara .npy + fp_json (atomiskt)
+    - Annars compute via embed_texts (eller compute_tfidf_embeddings för tfidf)
+      och spara .npy + fp_json (atomiskt)
     """
     fp_now = make_fingerprint(texts, spec=spec, batch_size=batch_size)
 
@@ -434,15 +554,24 @@ def load_or_compute_run_embeddings(
         except Exception:
             pass
 
-    X = embed_texts(
-        texts,
-        spec=spec,
-        batch_size=batch_size,
-        cache_scope=cache_scope,
-        allow_none=allow_none,
-        show_progress=show_progress,
-        progress_desc=progress_desc,
-    )
+    # TF-IDF goes through a separate compute path (corpus-fitted, no per-text cache).
+    if spec.encoder_type == "tfidf":
+        X = compute_tfidf_embeddings(
+            texts,
+            spec=spec,
+            show_progress=show_progress,
+            progress_desc=progress_desc,
+        )
+    else:
+        X = embed_texts(
+            texts,
+            spec=spec,
+            batch_size=batch_size,
+            cache_scope=cache_scope,
+            allow_none=allow_none,
+            show_progress=show_progress,
+            progress_desc=progress_desc,
+        )
 
     emb_npy.parent.mkdir(parents=True, exist_ok=True)
     fp_json.parent.mkdir(parents=True, exist_ok=True)
@@ -512,4 +641,5 @@ __all__ = [
     "load_or_compute_run_embeddings",
     "make_fingerprint",
     "validate_run_embeddings",
+    "compute_tfidf_embeddings",
 ]

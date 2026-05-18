@@ -2,6 +2,7 @@ numpy
 pandas
 scipy
 scikit-learn
+statsmodels
 matplotlib
 plotly
 networkx
@@ -18,3 +19,5 @@ openai
 
 sentence-transformers==2.7.0
 torch>=2.2,<3
+
+
