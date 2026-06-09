@@ -53,10 +53,7 @@ class _Row:
 # ─────────────────────────────────────────────────────────────
 
 def _similarity_spearman(test1: AngularSimilarityResult) -> tuple[float, float]:
-    from scipy.stats import spearmanr
-    rho, p = spearmanr(test1.pairs_df["dxi_rad"], test1.pairs_df["cos_similarity"])
-    return float(rho), float(p)
-
+    return float(test1.rho), float(test1.p_value)
 
 def _intensification_partial(rad: RadialIntensificationResult) -> tuple[float, float]:
     row = rad.statistics_df[
@@ -123,23 +120,23 @@ def build_summary_table(
 
     rows: list[_Row] = [
         _Row(
-            name_unicode="Test 1 — angular variation",
-            name_latex=r"Test 1 --- angular variation",
+            name_unicode="Angular variation (P1)",
+            name_latex=r"Angular variation (P1)",
             skills_plain="", skills_latex="",
             abilities_plain="", abilities_latex="",
             is_section=True,
         ),
         _Row(
-            name_unicode="Spearman ρ (HC similarity vs Δξ)",
-            name_latex=r"Spearman $\rho$ (HC similarity vs $\Delta\xi$)",
+            name_unicode="Spearman ρ (Deviation similarity vs Δξ)",
+            name_latex=r"Spearman $\rho$ (Deviation similarity vs $\Delta\xi$)",
             skills_plain=f"{s1_rho:+.3f}{_stars_plain(s1_p)}",
             skills_latex=_val_with_stars_latex(s1_rho, s1_p),
             abilities_plain=f"{a1_rho:+.3f}{_stars_plain(a1_p)}",
             abilities_latex=_val_with_stars_latex(a1_rho, a1_p),
         ),
         _Row(
-            name_unicode="Angular variance decomposition",
-            name_latex=r"Angular variance decomposition",
+            name_unicode="Angular variance decomposition (P1)",
+            name_latex=r"Angular variance decomposition (P1)",
             skills_plain="", skills_latex="",
             abilities_plain="", abilities_latex="",
             is_section=True,
@@ -161,8 +158,8 @@ def build_summary_table(
             abilities_latex=f"{a_med_chi:.3f}",
         ),
         _Row(
-            name_unicode="Test 2 — radial intensification",
-            name_latex=r"Test 2 --- radial intensification",
+            name_unicode="Radial intensification (P2)",
+            name_latex=r"Radial intensification (P2)",
             skills_plain="", skills_latex="",
             abilities_plain="", abilities_latex="",
             is_section=True,
@@ -244,15 +241,17 @@ def _render_latex(rows: list[_Row]) -> str:
         r"\begin{table}[!htbp]" + "\n"
         r"\centering" + "\n"
         r"\caption{Headline statistics for Skills and Abilities. "
-        r"Test 1 reports pair-level Spearman correlation between cosine "
-        r"similarity in descriptor space and circular angular distance "
-        r"$\Delta\xi$ across all occupation pairs. "
+        r"The angular variation row reports the pair-level Spearman "
+        r"correlation between cosine similarity of deviation descriptor "
+        r"profiles ($v_o - \bar v$, where $\bar v$ is the mean profile "
+        r"across occupations) and circular angular distance $\Delta\xi$ "
+        r"across all occupation pairs. "
         r"$R^{2}(\xi)$ and $R^{2}(\chi)$ are per-descriptor variance shares; "
         r"medians are taken across descriptors. "
         r"Partial Spearman $\rho(\chi\,\vert\,\xi)$ uses rank residualization "
         r"against $\xi$ via von Mises kernel regression. "
-        r"Significance: "
-        r"$^{***}\,p<0.001$ (Test 2 by 1000-permutation test).}" + "\n"
+        r"Significance: $^{***}\,p<0.001$ by permutation test (1000 draws; "
+        r"the similarity test permutes occupation angular positions).}" + "\n"
         r"\label{tab:skillabil-summary}" + "\n"
         r"\begin{tblr}{" + "\n"
         r"  colspec = {l c c}," + "\n"

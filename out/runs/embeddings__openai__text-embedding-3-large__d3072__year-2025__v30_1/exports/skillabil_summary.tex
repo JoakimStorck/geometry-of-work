@@ -1,6 +1,6 @@
 \begin{table}[!htbp]
 \centering
-\caption{Headline statistics for Skills and Abilities. Test 1 reports pair-level Spearman correlation between cosine similarity in descriptor space and circular angular distance $\Delta\xi$ across all occupation pairs. $R^{2}(\xi)$ and $R^{2}(\chi)$ are per-descriptor variance shares; medians are taken across descriptors. Partial Spearman $\rho(\chi\,\vert\,\xi)$ uses rank residualization against $\xi$ via von Mises kernel regression. Significance: $^{***}\,p<0.001$ (Test 2 by 1000-permutation test).}
+\caption{Headline statistics for Skills and Abilities. The angular variation row reports the pair-level Spearman correlation between cosine similarity of deviation descriptor profiles ($v_o - \bar v$, where $\bar v$ is the mean profile across occupations) and circular angular distance $\Delta\xi$ across all occupation pairs. $R^{2}(\xi)$ and $R^{2}(\chi)$ are per-descriptor variance shares; medians are taken across descriptors. Partial Spearman $\rho(\chi\,\vert\,\xi)$ uses rank residualization against $\xi$ via von Mises kernel regression. Significance: $^{***}\,p<0.001$ by permutation test (1000 draws; the similarity test permutes occupation angular positions).}
 \label{tab:skillabil-summary}
 \begin{tblr}{
   colspec = {l c c},
@@ -8,12 +8,12 @@
 \toprule
 \textbf{Statistic} & \textbf{Skills} & \textbf{Abilities} \\
 \midrule
-\textbf{Test 1 --- angular variation} & & \\
-\quad Spearman $\rho$ (HC similarity vs $\Delta\xi$) & $-0.603^{***}$ & $-0.494^{***}$ \\
-\textbf{Angular variance decomposition} & & \\
+\textbf{Angular variation (P1)} & & \\
+\quad Spearman $\rho$ (Deviation similarity vs $\Delta\xi$) & $-0.719^{***}$ & $-0.556^{***}$ \\
+\textbf{Angular variance decomposition (P1)} & & \\
 \quad Median $R^{2}(\xi)$ & 0.55 & 0.42 \\
 \quad Median $R^{2}(\chi)$ & 0.007 & 0.010 \\
-\textbf{Test 2 --- radial intensification} & & \\
+\textbf{Radial intensification (P2)} & & \\
 \quad Partial Spearman $\rho(\chi\,\vert\,\xi)$ & $+0.495^{***}$ & $+0.281^{***}$ \\
 \bottomrule
 \end{tblr}

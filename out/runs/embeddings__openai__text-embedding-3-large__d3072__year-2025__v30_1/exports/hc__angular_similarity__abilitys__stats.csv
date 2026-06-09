@@ -1,0 +1,14 @@
+stat,value
+centered,True
+n_occ,878
+n_pairs,385003
+rho_spearman,-0.5555405514327593
+p_permutation,0.000999000999000999
+n_permutations,1000
+rho_spearman_raw,-0.49389671551432546
+cos_fit_a,0.42931134810335325
+cos_fit_r2,0.9940990882175723
+rho_chibar_near30,0.5224501161310685
+rho_chibar_far150,-0.4676902585190487
+mean_sim_first_bin,0.48798076161809567
+mean_sim_last_bin,-0.3853086277476554
